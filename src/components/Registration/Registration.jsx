@@ -1,8 +1,7 @@
-import React, {Component} from 'react';
-import {getCurrentId} from '../../helpers/id-maker'
+import React, { Component } from 'react';
+import IncrementService from '../../helpers/IncrementService'
 
 const initData = {
-    id: getCurrentId,
     name: "",
     surname: "",
     sex: "",
@@ -13,8 +12,11 @@ const initData = {
 };
 
 class Registration extends Component {
+    constructor(props) {
+        super(props);
 
-    state = {...initData };
+        this.state = { ...initData };
+    }
 
     handleChange = (e) => {
         const target = e.target;
@@ -27,8 +29,7 @@ class Registration extends Component {
     };
 
     handleSubmit = () => {
-        console.log(this.state);
-        this.props.addUser(this.state);
+        this.props.addUser({ ...this.state, id: IncrementService.getNextId() });
         this.setState(initData);
     };
 

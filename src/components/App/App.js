@@ -1,4 +1,3 @@
-import './App.scss';
 import React from "react";
 import {
     BrowserRouter as Router,
@@ -6,37 +5,15 @@ import {
     Route,
     Redirect
 } from 'react-router-dom';
-
+import './App.scss';
 import Navigation from "../Navigation/Navigation";
 import Registration from "../Registration/Registration";
 import UsersList from "../UsersList/UsersList";
 import About from "../About/About";
+import { users } from "../../mocks/all-users.json";
 
 class App extends React.Component {
-    state = {
-        users: [
-            {
-                id: 0,
-                name: "username",
-                surname: "usernamov",
-                sex: "male",
-                card: "0000 0000 0000 0000",
-                isLoyalty: false,
-                coupon: "",
-                registrationDate: ""
-            },
-            {
-                id: 2,
-                name: "useriha",
-                surname: "usernamova",
-                sex: "female",
-                card: "0000 0000 0000 0000",
-                isLoyalty: false,
-                coupon: "",
-                registrationDate: ""
-            },
-        ],
-    }
+    state = { users }
 
     addUser = (user) => {
         this.setState((prevState) => {
