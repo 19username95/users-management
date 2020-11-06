@@ -38,6 +38,14 @@ class App extends React.Component {
         ],
     }
 
+    addUser = (user) => {
+        this.setState((prevState) => {
+            return {
+                users: [...prevState.users, { ...user }],
+            };
+        });
+    };
+
     /*
     componentDidMount() {
         fetch('../mocks/all-users.json')
@@ -60,7 +68,7 @@ class App extends React.Component {
                     <Route path='/users-list'>
                         <UsersList users={this.state.users} />
                     </Route>
-                    <Route path='/add-user'><Registration /></Route>
+                    <Route path='/add-user'><Registration addUser={this.addUser} /></Route>
                     <Route path='/about'><About /></Route>
                     <Route path='/'>
                         <Redirect to='users-list'/>
