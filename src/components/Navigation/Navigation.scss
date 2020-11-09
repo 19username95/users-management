@@ -1,11 +1,47 @@
+@import "../../constants/Constants";
+
 .Navigation {
   margin: 0;
+  height: 80px;
 
-  .Navigation-NavigationList {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+  .Navigation-AppBar {
+    background-color: darkred;
+
+    .Navigation-Toolbar {
+      .Navigation-NavigationList {
+        max-width: $container-width;
+        margin: 0 auto;
+        padding: 0;
+        list-style: none;
+        width: 100%;
+        display: flex;
+
+        .Navigation-NavigationListItem {
+          .Navigation-NavigationLink {
+            margin-right: 50px;
+            color: lightgray;
+
+            .Navigation-NavigationLinkIcon {
+              font-size: 30px;
+            }
+          }
+
+          .Navigation-NavigationLink:hover {
+            filter: opacity(75%);
+          }
+        }
+
+        .Navigation-NavigationListItem:last-child {
+          margin-left: auto;
+
+          .Navigation-NavigationLink {
+            margin: 0;
+          }
+        }
+      }
+    }
   }
+
 }
 
 @media screen and (min-width: 768px){
