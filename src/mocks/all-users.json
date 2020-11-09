@@ -5,30 +5,30 @@
       "name": "username",
       "surname": "usernamov",
       "sex": "male",
-      "card": "0000 0000 0000 0000",
+      "card": "MC ⠀•••• 1253",
       "isLoyalty": false,
       "coupon": "",
-      "registrationDate": ""
+      "registrationDate": "05.11.2020"
     },
     {
       "id": 2,
       "name": "useriha",
       "surname": "usernamova",
       "sex": "female",
-      "card": "0000 0000 0000 0000",
+      "card": "VISA ⠀•••• 3719",
       "isLoyalty": false,
       "coupon": "",
-      "registrationDate": ""
+      "registrationDate": "05.11.2020"
     },
     {
       "id": 3,
       "name": "user",
       "surname": "usernamenko",
-      "sex": "unknown",
-      "card": "0000 0000 0000 0000",
+      "sex": "other",
+      "card": "VISA ⠀•••• 2574",
       "isLoyalty": false,
       "coupon": "",
-      "registrationDate": ""
+      "registrationDate": "06.11.2020"
     }
   ]
 }

@@ -1,0 +1,68 @@
+@import "../../constants";
+
+.UsersSection {
+
+  .UsersSection-UsersTitle {
+
+  }
+
+  .UsersTable {
+    width: 100%;
+
+    .UsersTable-Head {
+
+      .UsersTable-HeadRow {
+
+        .UsersTable-HeadCell {
+          padding: 2% 1% 0.5%;
+          color: grey;
+        }
+      }
+    }
+
+    .UsersTable-Body {
+      .UsersTable-BodyRow {
+
+        .UsersTable-BodyCell {
+          padding: 2% 1%;
+          color: $main-color;
+          font-size: 1em;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $breakpoint-mobile-max) {
+  .UsersSection {
+
+    .UsersSection-UsersTitle {
+
+    }
+
+    .UsersTable {
+
+      .UsersTable-Head {
+
+        .UsersTable-HeadRow {
+
+          .UsersTable-HeadCell {
+          }
+        }
+      }
+
+      .UsersTable-Body {
+        .UsersTable-BodyRow {
+          display: flex;
+
+          .UsersTable-BodyCell {
+            font-size: 0.75em;
+          }
+
+          .UsersTable-BodyCell_loyalty {
+          }
+        }
+      }
+    }
+  }
+}
