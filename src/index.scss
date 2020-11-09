@@ -1,4 +1,4 @@
-@import "constants/Constants.scss";
+@import "constants";
 
 body {
   margin: 0;
@@ -7,12 +7,15 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
   background-color: lightgray;
+  color: $main-color;
+  font-family: $font-family;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  //font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  //  monospace;
 }
 
 div#root {
