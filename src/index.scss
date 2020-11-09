@@ -24,4 +24,13 @@ div#root {
   overflow-x: scroll;
   max-width: $container-width;
   margin: 0 auto;
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+div#root::-webkit-scrollbar {
+  display: none;
 }

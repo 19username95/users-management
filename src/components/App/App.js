@@ -11,6 +11,14 @@ import Registration from "../Registration/Registration";
 import UsersList from "../UsersList/UsersList";
 import About from "../About/About";
 import { users } from "../../mocks/all-users.json";
+import {createMuiTheme, MuiThemeProvider} from "@material-ui/core";
+
+const theme = createMuiTheme({
+    palette: {
+        primary: { main: '#8B0000' },
+        secondary: { main: '#282c3477' }
+    },
+});
 
 class App extends React.Component {
     state = { users }
@@ -25,7 +33,8 @@ class App extends React.Component {
 
     render() {
         return (
-            <Router>
+            <MuiThemeProvider theme={theme}>
+                <Router>
                 <Navigation />
                 <Switch>
                     <Route path='/users-list'>
@@ -38,7 +47,7 @@ class App extends React.Component {
                     </Route>
                 </Switch>
             </Router>
-
+            </MuiThemeProvider>
         );
     }
 

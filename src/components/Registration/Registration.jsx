@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import './Registration.scss';
+
 import IncrementService from '../../helpers/IncrementService'
 import {
-    Paper,
     TextField,
     Checkbox,
     FormControl,
@@ -9,8 +10,11 @@ import {
     FormLabel,
     RadioGroup,
     Radio,
-    Button
+    Button,
+    Box
 } from "@material-ui/core";
+
+import Title from "../Title/Title";
 
 const initData = {
     name: "",
@@ -46,50 +50,68 @@ class Registration extends Component {
 
     render() {
         return (
-            <Paper>
-                <form className='' onSubmit={this.handleSubmit}>
+            <Box className='RegistrationSection'>
+                <Title className='RegistrationSection-Title'>Add user</Title>
+                <form className='RegistrationForm' onSubmit={this.handleSubmit}>
                     <TextField
+                        className='RegistrationForm-Field RegistrationForm-Field_name'
                         name="name"
-                        label="name"
+                        label="Name"
                         value={this.state.name}
                         onChange={this.handleChange}/>
-                    <FormControl component="fieldset">
-                        <FormLabel component="legend">Gender</FormLabel>
-                        <RadioGroup aria-label="gender"
+                        <TextField
+                    className='RegistrationForm-Field RegistrationForm-Field_surname'
+                    name="surname"
+                    label="Surname"
+                    value={this.state.surname}
+                    onChange={this.handleChange}/>
+                    <FormControl component="fieldset"
+                                 className=' RegistrationForm-RadioField RegistrationForm-Field_gender'>
+                        <FormLabel className='RegistrationForm-RadioFieldLabel'
+                                   component="legend">Gender</FormLabel>
+                        <RadioGroup className='RegistrationForm-RadioFieldGroup'
                                     name="sex"
                                     value={this.state.sex}
                                     onChange={this.handleChange}>
-                            <FormControlLabel value="female" control={<Radio />} label="Female" />
-                            <FormControlLabel value="male" control={<Radio />} label="Male" />
-                            <FormControlLabel value="other" control={<Radio />} label="Other" />
+                            <FormControlLabel className='RegistrationForm-RadioButton'
+                                              value="female"
+                                              control={<Radio />}
+                                              label="Female" />
+                            <FormControlLabel className='RegistrationForm-RadioButton'
+                                              value="male"
+                                              control={<Radio />}
+                                              label="Male" />
+                            <FormControlLabel className='RegistrationForm-RadioButton'
+                                              value="other"
+                                              control={<Radio />}
+                                              label="Other"/>
                         </RadioGroup>
                     </FormControl>
                     <TextField
-                        name="surname"
-                        label="surname"
-                        value={this.state.surname}
-                        onChange={this.handleChange}/>
-                    <TextField
+                        className='RegistrationForm-Field RegistrationForm-Field_card'
                         name="card"
-                        label="card"
+                        label="Card"
                         value={this.state.card}
                         onChange={this.handleChange}/>
-                    <FormControlLabel control={
+                    <FormControlLabel
+                        className='RegistrationForm-Field RegistrationForm-Field_isLoyalty'
+                        control={
                         <Checkbox value={this.state.isLoyalty}
                                   name="isLoyalty"
                                   onChange={this.handleChange}/>
-                    }
-                    label='Loyalty program'/>
+                        }
+                        label='Loyalty program'/>
                     {this.state.isLoyalty ?
                     <TextField
+                        className='RegistrationForm-Field RegistrationForm-Field_coupon'
                         name="coupon"
-                        label="coupon"
+                        label="Coupon"
                         value={this.state.coupon}
                         onChange={this.handleChange}/>
                         : null}
-                        <Button onClick={this.handleSubmit}>Create</Button>
+                        <Button className='RegistrationForm-Button' onClick={this.handleSubmit}>Create</Button>
                 </form>
-            </Paper>
+            </Box>
         );
     }
 }

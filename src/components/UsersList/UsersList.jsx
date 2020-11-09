@@ -16,7 +16,7 @@ const UsersList = ({ users }) => {
     return (
         <Box className='UsersSection'>
             <Title className='UsersSection-UsersTitle'>Users</Title>
-            <Table className='UsersSection-UsersTable UsersTable' fixedHeader={true}>
+            <Table className='UsersSection-UsersTable UsersTable'>
                 <TableHead className='UsersTable-Head'>
                     <TableRow className='UsersTable-HeadRow'>
                         <TableCell className='UsersTable-HeadCell'>Name</TableCell>
@@ -28,10 +28,10 @@ const UsersList = ({ users }) => {
                 <TableBody className='UsersTable-Body'>
                     {users.map((user) => (
                         <TableRow  className='UsersTable-BodyRow' key={user.id}>
-                            <TableCell  className='UsersTable-BodyCell UsersTable-BodyCell_name'>{user.name} {user.surname}</TableCell>
-                            <TableCell  className='UsersTable-BodyCell UsersTable-BodyCell_sex'>{user.sex}</TableCell>
-                            <TableCell  className='UsersTable-BodyCell UsersTable-BodyCell_registration'>{user.registrationDate.toString()}</TableCell>
-                            <TableCell  className='UsersTable-BodyCell UsersTable-BodyCell_loyalty'>{user.isLoyalty?'Yes':'No'}</TableCell>
+                            <TableCell className='UsersTable-BodyCell UsersTable-BodyCell_name'>{user.name} {user.surname}</TableCell>
+                            <TableCell className='UsersTable-BodyCell UsersTable-BodyCell_sex'>{user.sex}</TableCell>
+                            <TableCell className='UsersTable-BodyCell UsersTable-BodyCell_registration'>{user.registrationDate.toString()}</TableCell>
+                            <TableCell className='UsersTable-BodyCell UsersTable-BodyCell_loyalty'>{user.isLoyalty?'Yes':'No'}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

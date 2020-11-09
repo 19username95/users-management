@@ -53,9 +53,13 @@
 
       .UsersTable-Body {
         .UsersTable-BodyRow {
+          display: flex;
 
           .UsersTable-BodyCell {
             font-size: 0.75em;
+          }
+
+          .UsersTable-BodyCell_loyalty {
           }
         }
       }
