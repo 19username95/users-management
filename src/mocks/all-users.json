@@ -8,7 +8,7 @@
       "card": "MC ⠀•••• 1253",
       "isLoyalty": false,
       "coupon": "",
-      "registrationDate": "2/02/2012"
+      "registrationDate": "05.11.2020"
     },
     {
       "id": 2,
@@ -18,17 +18,17 @@
       "card": "VISA ⠀•••• 3719",
       "isLoyalty": false,
       "coupon": "",
-      "registrationDate": "2/02/2012"
+      "registrationDate": "05.11.2020"
     },
     {
       "id": 3,
       "name": "user",
       "surname": "usernamenko",
-      "sex": "unknown",
+      "sex": "other",
       "card": "VISA ⠀•••• 2574",
       "isLoyalty": false,
       "coupon": "",
-      "registrationDate": "2/02/2012"
+      "registrationDate": "06.11.2020"
     }
   ]
 }

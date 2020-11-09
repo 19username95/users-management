@@ -1,5 +1,16 @@
 import React, { Component } from 'react';
 import IncrementService from '../../helpers/IncrementService'
+import {
+    Paper,
+    TextField,
+    Checkbox,
+    FormControl,
+    FormControlLabel,
+    FormLabel,
+    RadioGroup,
+    Radio,
+    Button
+} from "@material-ui/core";
 
 const initData = {
     name: "",
@@ -8,7 +19,7 @@ const initData = {
     card: "",
     isLoyalty: false,
     coupon: "",
-    registrationDate: new Date()
+    registrationDate: new Date().toLocaleDateString()
 };
 
 class Registration extends Component {
@@ -35,58 +46,50 @@ class Registration extends Component {
 
     render() {
         return (
-            <section>
-                <div>
-                    <label>
-                        User Name
-                        <input
-                            type="text"
-                            value={this.state.name}
-                            name="name"
-                            onChange={this.handleChange}
-                        />
-                    </label>
-                    <label>
-                        Gender
-                        <input
-                            type="text"
-                            value={this.state.sex}
-                            name="sex"
-                            onChange={this.handleChange}
-                        />
-                    </label>
-                    <label>
-                        Credit Card
-                        <input
-                            type="text"
-                            value={this.state.card}
-                            name="card"
-                            onChange={this.handleChange}
-                        />
-                    </label>
-                    <label>
-                        Use coupon?
-                        <input
-                            type="checkbox"
-                            value={this.state.isLoyalty}
-                            name="isLoyalty"
-                            onChange={this.handleChange}
-                        />
-                    </label>
-                    {this.state.isLoyalty ? (
-                        <label>
-                            Coupon
-                            <input
-                                type="text"
-                                value={this.state.coupon}
-                                name="coupon"
-                                onChange={this.handleChange}
-                            />
-                        </label>
-                    ) : null}
-                </div>
-                <button onClick={this.handleSubmit}>Send</button>
-            </section>
+            <Paper>
+                <form className='' onSubmit={this.handleSubmit}>
+                    <TextField
+                        name="name"
+                        label="name"
+                        value={this.state.name}
+                        onChange={this.handleChange}/>
+                    <FormControl component="fieldset">
+                        <FormLabel component="legend">Gender</FormLabel>
+                        <RadioGroup aria-label="gender"
+                                    name="sex"
+                                    value={this.state.sex}
+                                    onChange={this.handleChange}>
+                            <FormControlLabel value="female" control={<Radio />} label="Female" />
+                            <FormControlLabel value="male" control={<Radio />} label="Male" />
+                            <FormControlLabel value="other" control={<Radio />} label="Other" />
+                        </RadioGroup>
+                    </FormControl>
+                    <TextField
+                        name="surname"
+                        label="surname"
+                        value={this.state.surname}
+                        onChange={this.handleChange}/>
+                    <TextField
+                        name="card"
+                        label="card"
+                        value={this.state.card}
+                        onChange={this.handleChange}/>
+                    <FormControlLabel control={
+                        <Checkbox value={this.state.isLoyalty}
+                                  name="isLoyalty"
+                                  onChange={this.handleChange}/>
+                    }
+                    label='Loyalty program'/>
+                    {this.state.isLoyalty ?
+                    <TextField
+                        name="coupon"
+                        label="coupon"
+                        value={this.state.coupon}
+                        onChange={this.handleChange}/>
+                        : null}
+                        <Button onClick={this.handleSubmit}>Create</Button>
+                </form>
+            </Paper>
         );
     }
 }
