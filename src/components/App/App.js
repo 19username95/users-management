@@ -23,20 +23,6 @@ class App extends React.Component {
         });
     };
 
-    /*
-    componentDidMount() {
-        fetch('../mocks/all-users.json')
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    this.setState({
-                        users: result.users
-                    });
-                }
-            ).then(this.setState)
-    }
-*/
-
     render() {
         return (
             <Router>
