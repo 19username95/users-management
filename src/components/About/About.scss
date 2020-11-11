@@ -1,0 +1,60 @@
+.About {
+  display: grid;
+
+  .About-Avatar {
+    width: 200px;
+    height: 200px;
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  .About-Name {
+    grid-row: 1;
+    grid-column: 2;
+    font-size: 3em;
+    align-self: center;
+    justify-self: center;
+  }
+
+  .About-Contacts {
+    grid-row: 3;
+    grid-column: 1;
+    padding-top: 10%;
+
+    .About-Contact {
+      display: flex;
+      align-content: center;
+      padding-top: 2%;
+      *{
+        padding-right: 5%;
+      }
+    }
+    .About-ContactLink {
+      padding-right: 5%;
+      *{
+        padding-top: 5%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .About {
+    .About-Avatar {
+      width: 250px;
+      height: 250px;
+      justify-self: center;
+    }
+
+    .About-Name {
+      grid-row: 2;
+      grid-column: 1;
+      font-size: 2em;
+      margin-top: 5%;
+    }
+
+    .About-Contacts {
+
+    }
+  }
+}
