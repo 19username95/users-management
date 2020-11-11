@@ -18,7 +18,7 @@ import InputMask from 'react-input-mask';
 const initData = {
     name: "",
     surname: "",
-    sex: "",
+    sex: "unknown",
     card: "",
     isLoyalty: false,
     coupon: "",
@@ -34,7 +34,17 @@ class Registration extends Component {
 
     handleChange = (e) => {
         const target = e.target;
-        const value = target.type === "checkbox" ? target.checked : target.value;
+        let value = '';
+
+        if(target.type === 'checkbox') {
+            value = target.checked;
+        }
+        else if(target.name === 'name' || target.name === 'surname') {
+            value = target.value.replace(/[^A-Za-z]/gi, "");
+        }
+        else {
+            value = target.value;
+        }
         const name = target.name;
 
         this.setState({
@@ -43,7 +53,6 @@ class Registration extends Component {
     };
 
     handleSubmit = () => {
-
         this.props.addUser({ ...this.state, id: IncrementService.getNextId() });
         this.setState(initData);
     };
@@ -56,13 +65,15 @@ class Registration extends Component {
                     <TextField
                         className='RegistrationForm-Field RegistrationForm-Field_name'
                         name="name"
-                        label="Name*"
+                        label="Name"
+                        required
                         value={this.state.name}
                         onChange={this.handleChange}/>
                         <TextField
                     className='RegistrationForm-Field RegistrationForm-Field_surname'
                     name="surname"
-                    label="Surname*"
+                    label="Surname"
+                    required
                     value={this.state.surname}
                     onChange={this.handleChange}/>
                     <FormControl component="fieldset"
@@ -89,7 +100,7 @@ class Registration extends Component {
                     </FormControl>
                     <FormControl className='RegistrationForm-Field RegistrationForm-Field_card'>
                         <FormLabel className='RegistrationForm-CardLabel'
-                                   component="legend">Credit card*</FormLabel>
+                                   component="legend">Credit card</FormLabel>
                         <InputMask
                             className='RegistrationForm-CardInput'
                             name="card"
@@ -97,7 +108,8 @@ class Registration extends Component {
                             value={this.state.card}
                             onChange={this.handleChange}
                             mask='9999 9999 9999 9999'
-                            maskChar='_' alwaysShowMask='true'/>
+                            maskChar='_'
+                            alwaysShowMask='true'/>
                     </FormControl>
 
                     <FormControlLabel
@@ -116,7 +128,9 @@ class Registration extends Component {
                         value={this.state.coupon}
                         onChange={this.handleChange}/>
                         : null}
-                        <Button className='RegistrationForm-Button' onClick={this.handleSubmit}>Create</Button>
+                    <Button className='RegistrationForm-Button'
+                            disabled={this.state.name.trim() === '' || this.state.surname.trim() === ''}
+                            onClick={this.handleSubmit}>Create</Button>
                 </form>
             </Box>
         );
