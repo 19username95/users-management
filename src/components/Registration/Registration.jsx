@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Registration.scss';
-
+import Title from "../Title/Title";
 import IncrementService from '../../helpers/IncrementService'
 import {
     TextField,
@@ -13,8 +13,7 @@ import {
     Button,
     Box
 } from "@material-ui/core";
-
-import Title from "../Title/Title";
+import InputMask from 'react-input-mask';
 
 const initData = {
     name: "",
@@ -44,6 +43,7 @@ class Registration extends Component {
     };
 
     handleSubmit = () => {
+
         this.props.addUser({ ...this.state, id: IncrementService.getNextId() });
         this.setState(initData);
     };
@@ -56,13 +56,13 @@ class Registration extends Component {
                     <TextField
                         className='RegistrationForm-Field RegistrationForm-Field_name'
                         name="name"
-                        label="Name"
+                        label="Name*"
                         value={this.state.name}
                         onChange={this.handleChange}/>
                         <TextField
                     className='RegistrationForm-Field RegistrationForm-Field_surname'
                     name="surname"
-                    label="Surname"
+                    label="Surname*"
                     value={this.state.surname}
                     onChange={this.handleChange}/>
                     <FormControl component="fieldset"
@@ -80,19 +80,26 @@ class Registration extends Component {
                             <FormControlLabel className='RegistrationForm-RadioButton'
                                               value="male"
                                               control={<Radio />}
-                                              label="Male" />
+                                              label="Male"/>
                             <FormControlLabel className='RegistrationForm-RadioButton'
                                               value="other"
                                               control={<Radio />}
                                               label="Other"/>
                         </RadioGroup>
                     </FormControl>
-                    <TextField
-                        className='RegistrationForm-Field RegistrationForm-Field_card'
-                        name="card"
-                        label="Card"
-                        value={this.state.card}
-                        onChange={this.handleChange}/>
+                    <FormControl className='RegistrationForm-Field RegistrationForm-Field_card'>
+                        <FormLabel className='RegistrationForm-CardLabel'
+                                   component="legend">Credit card*</FormLabel>
+                        <InputMask
+                            className='RegistrationForm-CardInput'
+                            name="card"
+                            label="Card"
+                            value={this.state.card}
+                            onChange={this.handleChange}
+                            mask='9999 9999 9999 9999'
+                            maskChar='_' alwaysShowMask='true'/>
+                    </FormControl>
+
                     <FormControlLabel
                         className='RegistrationForm-Field RegistrationForm-Field_isLoyalty'
                         control={
