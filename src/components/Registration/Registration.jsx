@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Registration.scss';
-
+import Title from "../Title/Title";
 import IncrementService from '../../helpers/IncrementService'
 import {
     TextField,
@@ -13,13 +13,12 @@ import {
     Button,
     Box
 } from "@material-ui/core";
-
-import Title from "../Title/Title";
+import InputMask from 'react-input-mask';
 
 const initData = {
     name: "",
     surname: "",
-    sex: "",
+    sex: "unknown",
     card: "",
     isLoyalty: false,
     coupon: "",
@@ -35,7 +34,17 @@ class Registration extends Component {
 
     handleChange = (e) => {
         const target = e.target;
-        const value = target.type === "checkbox" ? target.checked : target.value;
+        let value = '';
+
+        if(target.type === 'checkbox') {
+            value = target.checked;
+        }
+        else if(target.name === 'name' || target.name === 'surname') {
+            value = target.value.replace(/[^A-Za-z]/gi, "");
+        }
+        else {
+            value = target.value;
+        }
         const name = target.name;
 
         this.setState({
@@ -57,16 +66,19 @@ class Registration extends Component {
                         className='RegistrationForm-Field RegistrationForm-Field_name'
                         name="name"
                         label="Name"
+                        required
                         value={this.state.name}
                         onChange={this.handleChange}/>
                         <TextField
                     className='RegistrationForm-Field RegistrationForm-Field_surname'
                     name="surname"
                     label="Surname"
+                    required
                     value={this.state.surname}
                     onChange={this.handleChange}/>
                     <FormControl component="fieldset"
-                                 className=' RegistrationForm-RadioField RegistrationForm-Field_gender'>
+                                 className=' RegistrationForm-RadioField RegistrationForm-Field_gender'
+                                 required>
                         <FormLabel className='RegistrationForm-RadioFieldLabel'
                                    component="legend">Gender</FormLabel>
                         <RadioGroup className='RegistrationForm-RadioFieldGroup'
@@ -80,19 +92,27 @@ class Registration extends Component {
                             <FormControlLabel className='RegistrationForm-RadioButton'
                                               value="male"
                                               control={<Radio />}
-                                              label="Male" />
+                                              label="Male"/>
                             <FormControlLabel className='RegistrationForm-RadioButton'
                                               value="other"
                                               control={<Radio />}
                                               label="Other"/>
                         </RadioGroup>
                     </FormControl>
-                    <TextField
-                        className='RegistrationForm-Field RegistrationForm-Field_card'
-                        name="card"
-                        label="Card"
-                        value={this.state.card}
-                        onChange={this.handleChange}/>
+                    <FormControl className='RegistrationForm-Field RegistrationForm-Field_card'>
+                        <FormLabel className='RegistrationForm-CardLabel'
+                                   component="legend">Credit card</FormLabel>
+                        <InputMask
+                            className='RegistrationForm-CardInput'
+                            name="card"
+                            label="Card"
+                            value={this.state.card}
+                            onChange={this.handleChange}
+                            mask='9999 9999 9999 9999'
+                            maskChar='_'
+                            alwaysShowMask='true'/>
+                    </FormControl>
+
                     <FormControlLabel
                         className='RegistrationForm-Field RegistrationForm-Field_isLoyalty'
                         control={
@@ -109,7 +129,11 @@ class Registration extends Component {
                         value={this.state.coupon}
                         onChange={this.handleChange}/>
                         : null}
-                        <Button className='RegistrationForm-Button' onClick={this.handleSubmit}>Create</Button>
+                    <Button className='RegistrationForm-Button'
+                            type='submit'
+                            disabled={this.state.name.trim() === '' || this.state.surname.trim() === '' || this.state.sex === 'unknown'}
+                             onClick={this.handleSubmit}
+                    >Create</Button>
                 </form>
             </Box>
         );
