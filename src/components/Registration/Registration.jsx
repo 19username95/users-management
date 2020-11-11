@@ -77,7 +77,8 @@ class Registration extends Component {
                     value={this.state.surname}
                     onChange={this.handleChange}/>
                     <FormControl component="fieldset"
-                                 className=' RegistrationForm-RadioField RegistrationForm-Field_gender'>
+                                 className=' RegistrationForm-RadioField RegistrationForm-Field_gender'
+                                 required>
                         <FormLabel className='RegistrationForm-RadioFieldLabel'
                                    component="legend">Gender</FormLabel>
                         <RadioGroup className='RegistrationForm-RadioFieldGroup'
@@ -129,8 +130,10 @@ class Registration extends Component {
                         onChange={this.handleChange}/>
                         : null}
                     <Button className='RegistrationForm-Button'
-                            disabled={this.state.name.trim() === '' || this.state.surname.trim() === ''}
-                            onClick={this.handleSubmit}>Create</Button>
+                            type='submit'
+                            disabled={this.state.name.trim() === '' || this.state.surname.trim() === '' || this.state.sex === 'unknown'}
+                             onClick={this.handleSubmit}
+                    >Create</Button>
                 </form>
             </Box>
         );
