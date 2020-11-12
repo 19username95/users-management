@@ -1,0 +1,45 @@
+@import "src/constants";
+
+.Institution {
+  display: grid;
+  grid-template-columns: 10% 85%;
+  column-gap: 5%;
+  grid-template-rows: auto;
+  padding: 3% 0 2%;
+
+  .Institution-Title {
+    justify-self: center;
+    align-self: center;
+    display: grid;
+    .Institution-Icon {
+      justify-self: center;
+    }
+  }
+  .Institution-Body {
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+
+    .Institution-Name {
+      font-size: 1em;
+      font-weight: bold;
+      color: $main-color;
+    }
+    .Institution-Faculty {
+      font-size: 0.85em;
+      color: $secondary-color;
+    }
+    .Institution-Specialty {
+      font-size: 0.8em;
+      color: $secondary-color;
+    }
+  }
+}
+
+@media screen and (max-width: $breakpoint-mobile-max) {
+  .Institution {
+    .Institution-Body {
+      text-align: center;
+    }
+  }
+}
