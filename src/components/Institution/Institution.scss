@@ -1,4 +1,5 @@
 @import "src/constants";
+
 .Institution {
   display: grid;
   grid-template-columns: 10% 85%;
@@ -33,5 +34,12 @@
       color: $secondary-color;
     }
   }
+}
 
+@media screen and (max-width: $breakpoint-mobile-max) {
+  .Institution {
+    .Institution-Body {
+      text-align: center;
+    }
+  }
 }
