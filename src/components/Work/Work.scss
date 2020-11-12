@@ -1,0 +1,27 @@
+@import "src/constants";
+
+.Work {
+  color: $main-color;
+  .Work-Title {
+    font-size: 1.2em;
+    font-weight: bold;
+    padding-top: 4%;
+  }
+
+  .Work-Info {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    font-size: 0.875em;
+    padding-bottom: 3%;
+
+    .Work-dates {
+      justify-self: end;
+      align-self: center;
+      font-size: 0.8em;
+    }
+  }
+
+  .Work-About {
+    text-align: justify;
+  }
+}
