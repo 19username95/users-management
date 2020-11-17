@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import './Registration.scss';
-import Title from "../Title/Title";
-import IncrementService from '../../helpers/IncrementService'
 import {
     TextField,
     Checkbox,
@@ -14,18 +11,18 @@ import {
     Box
 } from "@material-ui/core";
 import InputMask from 'react-input-mask';
+import './Registration.scss';
+import Title from "../Title/Title";
+import IncrementService from '../../helpers/IncrementService'
 
 const initData = {
     name: "",
     surname: "",
-    sex: "unknown",
+    sex: "",
     card: "",
     isLoyalty: false,
     coupon: "",
-    registrationDate: new Date().toLocaleDateString()
 };
-
-let message = '';
 
 class Registration extends Component {
     constructor(props) {
@@ -34,43 +31,82 @@ class Registration extends Component {
         this.state = { ...initData };
     }
 
-    handleChange = (e) => {
-        const target = e.target;
+    handleChange = ({ target }) => {
         let value = '';
 
         if(target.type === 'checkbox') {
             value = target.checked;
         }
-        else if(target.name === 'name' || target.name === 'surname') {
+        else if(['name', 'surname'].includes(target.name)) {
             value = target.value.replace(/[^A-Za-z]/gi, "");
         }
         else {
             value = target.value;
         }
-        const name = target.name;
 
         this.setState({
-            [name]: value,
+            [target.name]: value,
         });
     };
 
     handleSubmit = () => {
-        let id = IncrementService.getNextId()
-        this.props.addUser({ ...this.state, id: id });
-        message = 'User #' + id + ': ' + this.state.name + ' ' + this.state.surname
-            + ' added successfully.'
-        this.setState(initData);
+        const id = IncrementService.getNextId()
+        const {
+            name,
+            surname,
+            sex,
+            card,
+            isLoyalty,
+            coupon
+        } = this.state
+
+        this.props.addUser({
+            id,
+            name,
+            surname,
+            sex,
+            card,
+            isLoyalty,
+            coupon,
+            registrationDate: new Date().toLocaleDateString()
+        });
+        const message = `User #${id}: ${this.state.name} ${this.state.surname} successfully added.`
+        this.setState({ ...initData, message });
     };
 
     clearMessage = () => {
-        message = '';
+        this.setState({ message: '' });
     }
 
     componentWillUnmount() {
         this.clearMessage();
     }
 
+    isDataValid() {
+        const {
+            name,
+            surname,
+            sex,
+            isLoyalty,
+            coupon
+        } = this.state;
+
+        return name.trim().length &&
+            surname.trim().length &&
+            sex.length &&
+            (!isLoyalty || coupon.trim().length)
+    }
+
     render() {
+        const {
+            message,
+            name,
+            surname,
+            sex,
+            card,
+            isLoyalty,
+            coupon
+        } = this.state;
         return (
             <Box className='RegistrationSection'>
                 <Title className='RegistrationSection-Title'>Add user</Title>
@@ -83,14 +119,14 @@ class Registration extends Component {
                         name="name"
                         label="Name"
                         required
-                        value={this.state.name}
+                        value={name}
                         onChange={this.handleChange}/>
                         <TextField
                     className='RegistrationForm-Field RegistrationForm-Field_surname'
                     name="surname"
                     label="Surname"
                     required
-                    value={this.state.surname}
+                    value={surname}
                     onChange={this.handleChange}/>
                     <FormControl component="fieldset"
                                  className=' RegistrationForm-RadioField RegistrationForm-Field_gender'
@@ -99,7 +135,7 @@ class Registration extends Component {
                                    component="legend">Gender</FormLabel>
                         <RadioGroup className='RegistrationForm-RadioFieldGroup'
                                     name="sex"
-                                    value={this.state.sex}
+                                    value={sex}
                                     onChange={this.handleChange}>
                             <FormControlLabel className='RegistrationForm-RadioButton'
                                               value="female"
@@ -122,7 +158,7 @@ class Registration extends Component {
                             className='RegistrationForm-CardInput'
                             name="card"
                             label="Card"
-                            value={this.state.card}
+                            value={card}
                             onChange={this.handleChange}
                             mask='9999 9999 9999 9999'
                             maskChar='_'
@@ -132,27 +168,24 @@ class Registration extends Component {
                     <FormControlLabel
                         className='RegistrationForm-Field RegistrationForm-Field_isLoyalty'
                         control={
-                        <Checkbox value={this.state.isLoyalty}
+                        <Checkbox checked={isLoyalty}
                                   name="isLoyalty"
                                   onChange={this.handleChange}/>
                         }
                         label='Loyalty program'/>
-                    {this.state.isLoyalty ?
+                    {isLoyalty ?
                     <TextField
                         className='RegistrationForm-Field RegistrationForm-Field_coupon'
                         name="coupon"
                         label="Coupon"
                         required
-                        value={this.state.coupon}
+                        value={coupon}
                         onChange={this.handleChange}/>
                         : null}
                     <Button className='RegistrationForm-Button'
-                            type='submit'
-                            disabled={this.state.name.trim() === ''
-                            || this.state.surname.trim() === ''
-                            || this.state.sex === 'unknown'
-                            || (this.state.isLoyalty===true && this.state.coupon === '')}
-                             onClick={this.handleSubmit}
+                        type='submit'
+                        disabled={!this.isDataValid()}
+                        onClick={this.handleSubmit}
                     >Create</Button>
                 </form>
             </Box>
