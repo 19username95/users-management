@@ -66,6 +66,10 @@ class Registration extends Component {
         message = '';
     }
 
+    componentWillUnmount() {
+        this.clearMessage();
+    }
+
     render() {
         return (
             <Box className='RegistrationSection'>
