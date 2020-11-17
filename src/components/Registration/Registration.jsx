@@ -126,12 +126,16 @@ class Registration extends Component {
                         className='RegistrationForm-Field RegistrationForm-Field_coupon'
                         name="coupon"
                         label="Coupon"
+                        required
                         value={this.state.coupon}
                         onChange={this.handleChange}/>
                         : null}
                     <Button className='RegistrationForm-Button'
                             type='submit'
-                            disabled={this.state.name.trim() === '' || this.state.surname.trim() === '' || this.state.sex === 'unknown'}
+                            disabled={this.state.name.trim() === ''
+                            || this.state.surname.trim() === ''
+                            || this.state.sex === 'unknown'
+                            || (this.state.isLoyalty===true && this.state.coupon === '')}
                              onClick={this.handleSubmit}
                     >Create</Button>
                 </form>
