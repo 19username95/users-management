@@ -1,5 +1,3 @@
-import { users } from "../mocks/all-users.json";
-
 class IncrementService {
     static getNextId() {
         IncrementService.currentId += 1;
@@ -7,6 +5,6 @@ class IncrementService {
     }
 }
 
-IncrementService.currentId = users.length;
+IncrementService.currentId = 0;
 
 export default IncrementService;

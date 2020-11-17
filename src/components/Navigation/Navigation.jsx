@@ -11,7 +11,8 @@ import './Navigation.scss';
 
 class Navigation extends React.Component {
     render() {
-        return <Box className='Navigation' component="nav">
+        return (
+            <Box className='Navigation' component="nav">
                 <AppBar className='Navigation-AppBar'>
                     <Toolbar className='Navigation-Toolbar'>
                         <ul className='Navigation-NavigationList'>
@@ -33,7 +34,8 @@ class Navigation extends React.Component {
                         </ul>
                     </Toolbar>
                 </AppBar>
-        </Box>
+            </Box>
+        )
     }
 }
 

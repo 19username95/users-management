@@ -10,8 +10,7 @@ import Navigation from "../Navigation/Navigation";
 import Registration from "../Registration/Registration";
 import UsersList from "../UsersList/UsersList";
 import About from "../About/About";
-import { users } from "../../mocks/all-users.json";
-import {createMuiTheme, MuiThemeProvider} from "@material-ui/core";
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
 
 const theme = createMuiTheme({
     palette: {
@@ -21,37 +20,50 @@ const theme = createMuiTheme({
 });
 
 class App extends React.Component {
-    state = { users }
+    constructor(props) {
+        super(props);
+
+        // get users from local storage
+        const users = localStorage.hasOwnProperty("users") ?
+            JSON.parse(localStorage.getItem("users")) : []
+
+        // initialize state
+        this.state = { users }
+    }
 
     addUser = (user) => {
-        this.setState((prevState) => {
-            return {
-                users: [...prevState.users, { ...user }],
-            };
-        });
+        const users = [...this.state.users, user]
+
+        // updated users in state
+        this.setState({ users });
+
+        // update users in local storage
+        localStorage.setItem("users", JSON.stringify(users))
     };
 
     render() {
         return (
             <MuiThemeProvider theme={theme}>
                 <Router>
-                <Navigation />
-                <Switch>
-                    <Route path='/users-list'>
-                        <UsersList users={this.state.users} />
-                    </Route>
-                    <Route path='/add-user'><Registration addUser={this.addUser} /></Route>
-                    <Route path='/about'><About /></Route>
-                    <Route path='/'>
-                        <Redirect to='users-list'/>
-                    </Route>
-                </Switch>
-            </Router>
+                    <Navigation />
+                    <Switch>
+                        <Route path='/users-list'>
+                            <UsersList users={this.state.users} />
+                        </Route>
+                        <Route path='/add-user'>
+                            <Registration addUser={this.addUser} />
+                        </Route>
+                        <Route path='/about'>
+                            <About />
+                        </Route>
+                        <Route path='/'>
+                            <Redirect to='users-list'/>
+                        </Route>
+                    </Switch>
+                </Router>
             </MuiThemeProvider>
         );
     }
-
-
 }
 
 export default App;
