@@ -1,6 +1,12 @@
 @import "../../constants";
 
 .RegistrationSection {
+
+  .RegistrationSection-Message_success {
+    color: forestgreen;
+    font-size: 0.9em;
+  }
+
   .RegistrationForm {
     background-color: white;
     border: 1px solid lightgray;

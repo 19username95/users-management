@@ -25,6 +25,8 @@ const initData = {
     registrationDate: new Date().toLocaleDateString()
 };
 
+let message = '';
+
 class Registration extends Component {
     constructor(props) {
         super(props);
@@ -53,15 +55,25 @@ class Registration extends Component {
     };
 
     handleSubmit = () => {
-        this.props.addUser({ ...this.state, id: IncrementService.getNextId() });
+        let id = IncrementService.getNextId()
+        this.props.addUser({ ...this.state, id: id });
+        message = 'User #' + id + ': ' + this.state.name + ' ' + this.state.surname
+            + ' added successfully.'
         this.setState(initData);
     };
+
+    clearMessage = () => {
+        message = '';
+    }
 
     render() {
         return (
             <Box className='RegistrationSection'>
                 <Title className='RegistrationSection-Title'>Add user</Title>
-                <form className='RegistrationForm' onSubmit={this.handleSubmit}>
+                <div className='RegistrationSection-Message RegistrationSection-Message_success'>{message}</div>
+                <form className='RegistrationForm'
+                      onSubmit={this.handleSubmit}
+                      onFocus={this.clearMessage}>
                     <TextField
                         className='RegistrationForm-Field RegistrationForm-Field_name'
                         name="name"
