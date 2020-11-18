@@ -6,10 +6,10 @@ import {
     Redirect
 } from 'react-router-dom';
 import './App.scss';
-import Navigation from "../Navigation/Navigation";
-import Registration from "../Registration/Registration";
-import UsersList from "../UsersList/UsersList";
-import About from "../About/About";
+import Navigation from "../components/Navigation/Navigation";
+import Registration from "../pages/Registration/Registration";
+import UsersList from "../pages/UsersList/UsersList";
+import About from "../pages/About/About";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
 
 const theme = createMuiTheme({
@@ -23,12 +23,16 @@ class App extends React.Component {
     constructor(props) {
         super(props);
 
-        // get users from local storage
-        const users = localStorage.hasOwnProperty("users") ?
-            JSON.parse(localStorage.getItem("users")) : []
-
         // initialize state
-        this.state = { users }
+        this.state = { users: [] }
+    }
+
+    componentDidMount() {
+        if (localStorage.hasOwnProperty("users")) {
+            // get users from local storage
+            const users = JSON.parse(localStorage.getItem("users"));
+            this.setState({ users })
+        }
     }
 
     addUser = (user) => {
