@@ -9,34 +9,32 @@ import {AccountCircle, Group, GroupAdd} from "@material-ui/icons";
 
 import './Navigation.scss';
 
-class Navigation extends React.Component {
-    render() {
-        return (
-            <Box className='Navigation' component="nav">
-                <AppBar className='Navigation-AppBar'>
-                    <Toolbar className='Navigation-Toolbar'>
-                        <ul className='Navigation-NavigationList'>
-                            <li className='Navigation-NavigationListItem'>
-                                <NavLink className='Navigation-NavigationLink' to='/users-list'>
-                                    <Group className='Navigation-NavigationLinkIcon'/>
-                                </NavLink>
-                            </li>
-                            <li className='Navigation-NavigationListItem'>
-                                <NavLink className='Navigation-NavigationLink' to='/add-user'>
-                                    <GroupAdd className='Navigation-NavigationLinkIcon'/>
-                                </NavLink>
-                            </li>
-                            <li className='Navigation-NavigationListItem'>
-                                <NavLink className='Navigation-NavigationLink' to='/about'>
-                                    <AccountCircle className='Navigation-NavigationLinkIcon'/>
-                                </NavLink>
-                            </li>
-                        </ul>
-                    </Toolbar>
-                </AppBar>
-            </Box>
-        )
-    }
+const Navigation = () => {
+    return (
+        <Box className='Navigation' component="nav">
+            <AppBar className='Navigation-AppBar'>
+                <Toolbar className='Navigation-Toolbar'>
+                    <ul className='Navigation-NavigationList'>
+                        <li className='Navigation-NavigationListItem'>
+                            <NavLink className='Navigation-NavigationLink' to='/users-list'>
+                                <Group className='Navigation-NavigationLinkIcon'/>
+                            </NavLink>
+                        </li>
+                        <li className='Navigation-NavigationListItem'>
+                            <NavLink className='Navigation-NavigationLink' to='/add-user'>
+                                <GroupAdd className='Navigation-NavigationLinkIcon'/>
+                            </NavLink>
+                        </li>
+                        <li className='Navigation-NavigationListItem'>
+                            <NavLink className='Navigation-NavigationLink' to='/about'>
+                                <AccountCircle className='Navigation-NavigationLinkIcon'/>
+                            </NavLink>
+                        </li>
+                    </ul>
+                </Toolbar>
+            </AppBar>
+        </Box>
+    )
 }
 
 export default Navigation;
